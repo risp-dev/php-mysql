@@ -1,8 +1,8 @@
 <?php
 
-$dice = rand(1, 6);
-
 echo '<strong>Throw A Dice!</strong><br><br>';
+
+$dice = rand(1, 6);
 
 if ($dice == 6) {
 echo 'Jackpot!' . ' ' . "You've thrown a" . ' ' . $dice . '!';  
