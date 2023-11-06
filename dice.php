@@ -2,11 +2,14 @@
 
 $dice = rand(1, 6);
 
-echo 'Throw A Dice!<br>';
+echo '<strong>Throw A Dice!</strong><br><br>';
 
 if ($dice == 6) {
 echo 'Jackpot!' . ' ' . "You've thrown a" . ' ' . $dice . '!';  
 }
 else{
-   echo 'Your number is'. ' ' . $dice . '!' . ' ' . 'Refresh or leave ;)'; 
+    header("Refresh:3");
+    echo 'Your number is'. ' ' . $dice . '!' . ' ' . 'Your browser will refresh after 3 sec. or you  may do it manualy!'; 
 }
+
+echo '<br><br><a href="./dice.php">Refresh current page<a/>';
