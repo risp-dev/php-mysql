@@ -6,4 +6,4 @@ $birthdays = [
     'anna' => '1972-08-10'
 ];
 
-echo 'Annos gimimo diena yra ' . $birthdays['anna'];
+echo 'Annos\'s gimimo diena yra ' . $birthdays['anna'];
