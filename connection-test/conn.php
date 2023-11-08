@@ -11,3 +11,6 @@ if ($conn->connect_error) {
 }
 echo"connected!";
 $conn ->close();
+
+//Simply SQL2 , by Rudy Limeback. 
+//Jump Start MySQL3, by Timothy Boronczyk
