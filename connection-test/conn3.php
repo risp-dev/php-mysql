@@ -5,11 +5,17 @@ $dbusername = "rispdev";
 $dbpassword = "69*kQuyt/Kly5";
 $dbname = "november";
 
-$conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
+//$conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
+try {
+$pdo = new PDO("mysql:host=$servername;dbname=$dbname", $dbusername, $dbpassword);
+//$pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
 
-if($conn -> connect_error) {
-    die("". $conn -> connect_error);
-}
+
+ // Set the PDO error mode to exception
+ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 echo "Prisijungiau";
-$conn -> close();
+} catch(PDOException $e) {
+    // If there's an error, catch it and print the error message
+    echo "Connection failed: " . $e->getMessage();
+}
