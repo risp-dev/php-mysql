@@ -10,6 +10,7 @@ try {
 $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $dbusername, $dbpassword);
 //$pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
 
+$output = 'Database connection established.';
 
  // Set the PDO error mode to exception
  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -17,5 +18,9 @@ $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $dbusername, $dbpassword
 echo "Prisijungiau";
 } catch(PDOException $e) {
     // If there's an error, catch it and print the error message
-    echo "Connection failed: " . $e->getMessage();
+    //echo "Connection failed: " . $e->getMessage();
+    $output = 'Unable to connect to the database server ' . $e->getMessage();
 }
+
+include __DIR__ .'/../templates/connection.html.php';
+//C:\xampp\htdocs\ninja\php-mysql\default\templates\connection.html.php
