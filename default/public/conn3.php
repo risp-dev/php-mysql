@@ -7,7 +7,7 @@ $dbname = "november";
 
 //$conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
 try {
-$pdo = new PDO("mysql:host=$servername;dbname=$dbname", $dbusername, $dbpassword);
+$pdo = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8mb4", $dbusername, $dbpassword);
 //$pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
 
 $output = 'Database connection established.';
