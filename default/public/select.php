@@ -9,7 +9,7 @@ $output = 'Database connection established.';
     $result = $pdo->query($sql);
 
     while ($row = $result->fetch()) {
-        $test[] = $row['dumbtext'];
+        $jokes[] = $row['dumbtext'];
     }
    
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
