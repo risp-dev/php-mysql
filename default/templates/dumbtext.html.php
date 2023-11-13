@@ -8,7 +8,7 @@
 <body>
     <?php if (isset($error)): ?>
     <p>
-        <?php echo $error; ?>
+        <?=$error; ?>
     </p>
     <?php else: ?>
         <?php foreach ($jokes as $dumbtext): ?>
