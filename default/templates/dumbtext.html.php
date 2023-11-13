@@ -14,7 +14,7 @@
         <?php foreach ($jokes as $dumbtext): ?>
             <blockquote>
                 <p>
-                    <?php echo htmlspecialchars($dumbtext, ENT_QUOTES, 'UTF-8') ?>
+                    <?=htmlspecialchars($dumbtext, ENT_QUOTES, 'UTF-8') ?>
         </p>
         </blockquote>
         <?php endforeach; ?>
