@@ -3,15 +3,16 @@
 try {
 $pdo = new PDO("mysql:host=localhost;dbname=november;charset=utf8mb4", 'rispdev', '69*kQuyt/Kly5');
 
-$output = 'Database connection established.';
-      $sql = 'SELECT `dumbtext` FROM `test`';
+//$output = 'Database connection established.';
 
-    $result = $pdo->query($sql);
+      $sql = 'SELECT `dumbtext`, `id` FROM test';
 
-    while ($row = $result->fetch()) {
+    $jokes = $pdo->query($sql);
+
+   /* while ($row = $dumbtext->fetch()) {
         $jokes[] = $row['dumbtext'];
     }
-
+*/
     $title = 'List of Jokes';
 
     ob_start();

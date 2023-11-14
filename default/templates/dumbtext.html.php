@@ -6,19 +6,19 @@
     <title>Document</title>
 </head>
 <body>
-    <?php if (isset($error)): ?>
-    <p>
-        <?=$error; ?>
-    </p>
-    <?php else: ?>
-        <?php foreach ($jokes as $dumbtext): ?>
-            <blockquote>
-                <p>
-                    <?=htmlspecialchars($dumbtext, ENT_QUOTES, 'UTF-8') ?>
+
+
+        <?php foreach($jokes as $dumbtext): ?>
+        <blockquote>
+        <p>
+        <?= htmlspecialchars($dumbtext['dumbtext'], ENT_QUOTES, 'UTF-8') ?>
+<form action="delete.php" method="post">
+    <input type="hidden" name="id" value="<?= $dumbtext['id'] ?>">
+    <input type="submit" value="Delete">
+</form>
         </p>
         </blockquote>
         <?php endforeach; ?>
-        <?php endif; ?>
      
 </body>
 </html>
