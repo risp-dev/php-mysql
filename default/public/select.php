@@ -1,7 +1,22 @@
 <?php
 
 try {
-include __DIR__ . '/../../includes/dbConn.php';
+include_once __DIR__ . '/../../includes/dbConn.php';
+include_once __DIR__ . '/../../includes/DatabaseFunctions.php';
+
+echo allJokes($pdo);
+
+/*
+include_once __DIR__ . '/../includes/DatabaseConnection.php';
+function totalJokes() {
+$stmt = $pdo->prepare('SELECT COUNT(*) FROM `joke`');
+$stmt->execute();
+$row = $stmt->fetch();
+return $row[0];
+233 PHP & MySQL: Novice to Ninja, 7th Edition}
+echo totalJokes();
+*/
+
 
 //$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
