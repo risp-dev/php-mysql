@@ -3,7 +3,7 @@
 
 if(isset($_POST['dumbtext'])) {
     try {
-        $pdo = new PDO('mysql:host=localhost;dbname=november;charset=utf8mb4',  'rispdev', '69*kQuyt/Kly5');
+        include __DIR__ . '/../../includes/dbConn.php';
 
             $sql = 'INSERT INTO `test` SET
             `dumbtext` = :dumbtext';
