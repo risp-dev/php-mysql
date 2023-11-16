@@ -12,6 +12,8 @@
         <blockquote>
         <p>
         <?= htmlspecialchars($dumbtext['dumbtext'], ENT_QUOTES, 'UTF-8') ?>
+        (by <a href="mailto:<?php echo htmlspecialchars($dumbtext['email'], ENT_QUOTES, 'UTF-8'); ?>">
+        <?php echo htmlspecialchars($dumbtext['name'], ENT_QUOTES, 'UTF-8'); ?></a>)
 <form action="delete.php" method="post">
     <input type="hidden" name="id" value="<?= $dumbtext['id'] ?>">
     <input type="submit" value="Delete">

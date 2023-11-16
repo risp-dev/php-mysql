@@ -3,10 +3,15 @@
 try {
 $pdo = new PDO("mysql:host=localhost;dbname=november;charset=utf8mb4", 'rispdev', '69*kQuyt/Kly5');
 
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
 //$output = 'Database connection established.';
 
-      $sql = 'SELECT `dumbtext`, `id` FROM test';
+$sql = 'SELECT `test`.`id`, `dumbtext`, `name`, `email`
+FROM `test` INNER JOIN  `author`
+ON `authorid` = `author`.`id`';
 
+     // $sql = 'SELECT `dumbtext`, `id` FROM test';
     $jokes = $pdo->query($sql);
 
    /* while ($row = $dumbtext->fetch()) {
@@ -21,9 +26,9 @@ $pdo = new PDO("mysql:host=localhost;dbname=november;charset=utf8mb4", 'rispdev'
 
     $output = ob_get_clean();
    
-  //  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 }
 catch(PDOException $e) {
+  $title = 'Error we have: ';
     $output='Database error: ' . $e->getMessage() . ' in ' . 
     $e->getFile().':'.$e->getLine();
 }
