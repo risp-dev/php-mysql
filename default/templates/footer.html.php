@@ -8,7 +8,7 @@
 <body>
     <footer>
    <p>
-    &copy <?php echo date('Y'); ?> www.www.www
+   &copy <?php echo date('Y'); ?> <a href="www.some-site-name.com">www</a>
 </p> 
 </footer>
 </body>
