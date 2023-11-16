@@ -22,8 +22,7 @@
 <main>
     <?=$output; ?>
 </main>
-<footer>
-    <p>&copy <?=date('Y'); ?></p>
-</footer>
+<?php include 'footer.html.php'; ?>
+
 </body>
 </html>
