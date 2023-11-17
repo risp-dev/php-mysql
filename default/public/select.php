@@ -5,7 +5,8 @@ include_once __DIR__ . '/../../includes/dbConn.php';
 include_once __DIR__ . '/../../includes/DatabaseFunctions.php';
 
 //echo allJokes($pdo);
-
+$dumbtextx10 = getDumbtext($pdo, 4);
+echo $dumbtextx10['dumbtext'];
 //$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 //$output = 'Database connection established.';

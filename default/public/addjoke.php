@@ -4,17 +4,13 @@
 if(isset($_POST['dumbtext'])) {
     try {
         include __DIR__ . '/../../includes/dbConn.php';
+        include __DIR__ . '/../../includes/DatabaseFunctions.php';
 
-            $sql = 'INSERT INTO `test` SET
-            `dumbtext` = :dumbtext';
+        insertDumb($pdo, $_POST['dumbtext'], 2);
+        header(location:select.php');
 
-            $stmt = $pdo->prepare($sql);
-            $stmt->bindValue(':dumbtext', $_POST['dumbtext']);
-            $stmt->execute();
-            header('location: select.php');
-
-
-        } catch (PDOException $e) {
+    }
+    catch (PDOException $e) {
             $title = 'Damn error';
             $output = 'Database error: ' . $e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine();
         }
