@@ -7,7 +7,7 @@ if(isset($_POST['dumbtext'])) {
         include __DIR__ . '/../../includes/DatabaseFunctions.php';
 
         insertDumb($pdo, $_POST['dumbtext'], 2);
-        header(location:select.php');
+        header(Location:select.php');
 
     }
     catch (PDOException $e) {
@@ -16,7 +16,7 @@ if(isset($_POST['dumbtext'])) {
         }
         
 }else {
-$title = 'Ikelkite savo kvailą juokelį';
+$title = 'Ikelkite savo juokelį';
 
 ob_start();
 

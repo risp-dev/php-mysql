@@ -1,11 +1,12 @@
 <?php
 
-function allJokes($dbase) {
-    $stmt = $dbase->prepare('SELECT COUNT(*) FROM `test`');
+function totalJokes($pdo) {
+    $stmt = $pdo->prepare('SELECT COUNT(*) FROM `test`');
     $stmt->execute();
     $row = $stmt->fetch();
     return $row[0];
 }
+
 function getJoke($pdo, $id) {
     $stmt = $pdo->prepare('SELECT * FROM `test` WHERE `id` = :id');
     
@@ -18,7 +19,7 @@ function getJoke($pdo, $id) {
     return $stmt->fetch();
     
 }
-/*function getInsertDumb($pdo, $dumbtext, $authorid) {
+function insertJoke($pdo, $dumbtext, $authorid) {
     $stmt = $pdo->prepare('INSERT INTO `test` 
     (`dumbtext`, `authorid`)
     VALUES
@@ -31,16 +32,34 @@ function getJoke($pdo, $id) {
     ];
     $stmt->execute($values);
 }
-*/
-function updateJoke($pdo, $jokeId, $joketext, $authorId) {
-    $stmt = $pdo->prepare('UPDATE `joke` SET
-    `authorId` = :authorId,
+
+function updateJoke($pdo, $jokeid, $joketext, $authorid) {
+    $stmt = $pdo->prepare('UPDATE `test` SET
+    `authorid` = :authorid,
     `joketext` = :joketext
     WHERE `id` = :id');
     $values = [
     ':joketext' => $joketext,
-    ':authorId' => $authorId,
-    ':id' => $jokeId
+    ':authorid' => $authorid,
+    ':id' => $jokeid
     ];
     $stmt->execute($values);
     }
+
+    function deleteJoke($pdo, $id) {
+        $stmt = $pdo->prepare('DELETE FROM `test` WHERE `id` = :id');
+        $values = [
+            ':id' => $id
+        ];
+        $stmt->execute($values);
+    }
+
+    function allJokes($pdo) {
+        $stmt = $pdo->prepare('SELECT `test`.`id`, `dumbtext`, `name`, `email`
+        FROM `test` INNER JOIN `author`
+        ON `authorid` = `author`.`id`');
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    

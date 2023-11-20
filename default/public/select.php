@@ -4,27 +4,9 @@ try {
 include_once __DIR__ . '/../../includes/dbConn.php';
 include_once __DIR__ . '/../../includes/DatabaseFunctions.php';
 
-//echo allJokes($pdo);
-$dumbtextx10 = getDumbtext($pdo, 4);
-echo $dumbtextx10['dumbtext'];
-//$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-//$output = 'Database connection established.';
-
-$sql = 'SELECT `test`.`id`, `dumbtext`, `name`, `email`
-FROM `test` INNER JOIN  `author`
-ON `authorid` = `author`.`id`';
-
-     // $sql = 'SELECT `dumbtext`, `id` FROM test';
-    $jokes = $pdo->query($sql);
-
-   /* while ($row = $dumbtext->fetch()) {
-        $jokes[] = $row['dumbtext'];
-    }
-*/
-    $title = 'List of Jokes';
-
     $allJokes = allJokes($pdo);
+    $title = 'List of Jokes';
+    $totalJokes = totalJokes($pdo);
 
     ob_start();
 
