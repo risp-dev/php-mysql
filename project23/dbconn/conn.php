@@ -2,7 +2,7 @@
 try {
 $pdo = new PDO("mysql:host=localhost;dbname=project24;charsert=utf8mb4;",  'antrekotas', 'vmo/opUp73GnXuRx');
 
-$output = 'Prisijungiau';
+$output = '';
 
 }catch (PDOException $e){
 
