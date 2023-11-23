@@ -6,7 +6,7 @@ $output = 'Prisijungiau';
 
 }catch (PDOException $e){
 
-    $output = 'Klaida: ' . $e->getMessage() . ' in ' . $e->getFilename() . ':' . $e->getLine();
+    $output = 'Klaida: ' . $e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine();
 }
 
 include __DIR__ . '/../templates/connection.html.php';
