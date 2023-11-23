@@ -1,10 +1,10 @@
 <?php
 try {
-$pdo = new PDO("mysql:host=localhost;dbname=project23;charsert=utf8mb4;",  'plombyras', '(xePExhUv.6qI02B');
+$pdo = new PDO("mysql:host=localhost;dbname=project24;charsert=utf8mb4;",  'antrekotas', 'vmo/opUp73GnXuRx');
 
 $output = 'Prisijungiau';
 
-}catch (PDOExemtion $e){
+}catch (PDOException $e){
 
     $output = 'Klaida: ' . $e->getMessage() . ' in ' . $e->getFilename() . ':' . $e->getLine();
 }
