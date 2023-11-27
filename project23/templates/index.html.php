@@ -12,9 +12,9 @@
     </p>
     <?php else: ?>
         <?php foreach ($jokes as $joke): ?>
-    
                 <p>
-          <h2><?= htmlspecialchars($joke, ENT_QUOTES, 'UTF-8') ?></h2>  
+          <h2><?= htmlspecialchars($joke, ENT_QUOTES, 'UTF-8') ?></h2> 
+       
         </p>
         <?php endforeach; ?>
         <?php endif; ?>
