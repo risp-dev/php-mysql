@@ -1,6 +1,6 @@
 <?php
 try {
-$pdo = new PDO("mysql:host=localhost;dbname=project24;charsert=utf8mb4;",  'antrekotas', 'vmo/opUp73GnXuRx');
+$pdo = new PDO("mysql:host=localhost;dbname=project24;charset=utf8mb4;",  'antrekotas', 'vmo/opUp73GnXuRx');
 
 $output = '';
 
