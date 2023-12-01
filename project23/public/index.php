@@ -1,5 +1,5 @@
 <?php
-
+$title = 'Hi there';
 include __DIR__ . '/../dbconn/conn.php';
 
 $sql = 'SELECT `joketext` 
@@ -13,7 +13,7 @@ $result = $pdo->query($sql);
     foreach ($result as $row) {
     $jokes[] = $row['joketext'];
 }
-
-
-include __DIR__ . '/../templates/layout.html.php';
+ob_start();
 include __DIR__ . '/../templates/index.html.php';
+$output = ob_get_clean();
+include __DIR__ . '/../templates/layout.html.php';
