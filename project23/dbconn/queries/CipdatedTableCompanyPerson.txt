@@ -1,0 +1,42 @@
+CREATE TABLE IF NOT EXISTS `person` (
+    `person_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `person_name` VARCHAR(120),
+    `person_city` VARCHAR(120),
+    `company_id` INT,
+    FOREIGN KEY (`company_id`) REFERENCES `company`(`company_id`)
+);
+
+
+CREATE TABLE IF NOT EXISTS `company` (
+    `company_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `company_name` VARCHAR(120),
+    `company_city` VARCHAR(120),
+    `company_budget` INT(8.2)
+    );
+
+
+
+
+INSERT INTO `person` 
+(`person_name`, `person_city`, `person_phone`)
+VALUES
+('Jonas', 'Vilnius', '1'),
+('Algis', 'Kaunas', '2'),
+('Aldevinas', 'Klaipėda', '2'),
+('Burundukas', 'Klaipėda', '1'),
+('Elektrošokas', 'Kaunas', '4'),
+('Ramutis', 'Klaipėda', '3'),
+('Zita', 'Vilnius', '3'),
+('Midzelis', 'Palanga', '4'),
+('Girinis', 'Plungės žiedas', '1'),
+('Stumtraukis', 'Šaukotas', '2'),
+('Karpis', 'Šilutė', '3'),
+('Lydeka', 'Kaunas', '4')
+
+INSERT INTO `company`
+(`company_name`, `company_city`, `company_budget`)
+VALUES
+('Telia', 'Vilnius', '85000,26'),
+('LG', 'Kaunas', '5658925,38'),
+('Nafta', 'Mažeikiai', '2545878,65'),
+('Norfa', 'Balbieriškis', '1254555,89')
