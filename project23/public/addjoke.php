@@ -8,7 +8,7 @@ if (isset($_POST['joketext'])) {
         `joketext` = :joketext,
         `jokedate` = CURDATE()';
         $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':joketext', $_POST['joketext']) ;
+        $stmt->bindValue(':joketext', $_POST['joketext']) ;
         $stmt->execute();
         header('Location: index.php');
         

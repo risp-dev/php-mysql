@@ -2,16 +2,13 @@
 $title = 'My crazy jokes';
 include __DIR__ . '/../dbconn/conn.php';
 
-$sql = 'SELECT `joketext` FROM `joke`';
-$result = $pdo->query($sql);
+ $sql = 'SELECT `joketext`, `id` FROM joke';
 
-    foreach ($result as $row) {
-    $jokes[] = $row['joketext'];
-}
+  $jokes = $pdo->query($sql);
 
+  $title = 'Joke list';
 
-
-include __DIR__ . '/../templates/layout.html.php';
-ob_start(); 
-include __DIR__ .'/../templates/jokelist.html.php';
+  ob_start();
+include __DIR__ . '/../templates/jokelist.html.php';
 $output = ob_get_clean();
+include __DIR__ . '/../templates/layout.html.php';
