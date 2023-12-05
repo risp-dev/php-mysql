@@ -2,7 +2,14 @@
 $title = 'My crazy jokes';
 include __DIR__ . '/../dbconn/conn.php';
 
- $sql = 'SELECT `joketext`, `id` FROM joke';
+ //$sql = 'SELECT `joketext`, `id` FROM joke';
+
+$sql = 'SELECT j.`id`, j.`joketext`, j.`jokedate`, a.`name`, a.`email`
+FROM
+`joke` j 
+INNER JOIN `author` a
+ON
+j.`authorid`=a.`id`';
 
   $jokes = $pdo->query($sql);
 
