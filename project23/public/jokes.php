@@ -1,6 +1,8 @@
 <?php
 $title = 'My crazy jokes';
+try {
 include __DIR__ . '/../dbconn/conn.php';
+include __DIR__ .'/../dbconn/dbfunctions.php';
 
  //$sql = 'SELECT `joketext`, `id` FROM joke';
 
@@ -14,8 +16,14 @@ j.`authorid`=a.`id`';
   $jokes = $pdo->query($sql);
 
   $title = 'Joke list';
+  $totalJokes = totalJokes($pdo);
 
-  ob_start();
+ob_start();
 include __DIR__ . '/../templates/jokelist.html.php';
 $output = ob_get_clean();
+} catch (PDOException $e) {
+  $title = 'An error has accured';
+
+  $output = 'Database error '. $e->getMessage() . 'in ' . $e->getFile() . ':' . $e->getLine();
+}
 include __DIR__ . '/../templates/layout.html.php';

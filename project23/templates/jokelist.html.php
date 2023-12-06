@@ -11,6 +11,7 @@
 <?=$error; ?>
     </p>
     <?php else: ?>
+      <p>Turime <?=$totalJokes ?> įrašų mūsų DB</p>
         <?php foreach ($jokes as $joke): ?>
 <blockquote>
   <p>
