@@ -18,3 +18,16 @@ function getJoke($pdo, $id) {
     return $stmt->fetch();
 }
 
+function insertJoke($pdo, $joketext, $authorid) {
+    $stmt = $pdo->prepare('INSERT INTO `joke` (`joketext`, `jokedate`, `authorid`)
+    VALUES
+    (:joketext, :jokedate, :authorid)');
+    
+    $values = [
+    ':joketext' => $joketext,
+    ':authorid' => $authorid,
+    ':jokedate' => date('Y-m-d')
+    ];
+    
+    $stmt->execute($values);
+    }

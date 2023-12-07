@@ -2,14 +2,16 @@
 if (isset($_POST['joketext'])) {
     try {
         $pdo = new PDO("mysql:host=localhost;dbname=project24;charsert=utf8mb4;",  'antrekotas', 'vmo/opUp73GnXuRx');
-        
+        include_once __DIR__ .'/../dbconn/dbfunctions.php';
+
+        insertJoke($pdo, $_POST['joketext'], 1);
         //$output = '';
-        $sql = 'INSERT INTO `joke` SET
-        `joketext` = :joketext,
-        `jokedate` = CURDATE()';
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindValue(':joketext', $_POST['joketext']) ;
-        $stmt->execute();
+        //$sql = 'INSERT INTO `joke` SET
+        //`joketext` = :joketext,
+       // `jokedate` = CURDATE()';
+       // $stmt = $pdo->prepare($sql);
+       // $stmt->bindValue(':joketext', $_POST['joketext']) ;
+       // $stmt->execute();
         header('Location: index.php');
         
         }catch (PDOException $e){
