@@ -13,14 +13,16 @@ include __DIR__ .'/../dbconn/dbfunctions.php';
 // ON
 // j.`authorid`=a.`id`';
 
-$sql = 'SELECT `joke`.`id`, `joketext`, `name`, `email`
-    FROM `joke` INNER JOIN `author`
-      ON `authorid` = `author`.`id`';
+//$sql = 'SELECT `joke`.`id`, `joketext`, `name`, `email`
+   // FROM `joke` INNER JOIN `author`
+     // ON `authorid` = `author`.`id`';
 
-  $jokes = $pdo->query($sql);
-
+  //$jokes = $pdo->query($sql);
   $title = 'Joke list';
-  $totalJokes = totalJokes($pdo);
+  $jokes = allJokes($pdo);
+
+  
+ $totalJokes = totalJokes($pdo);
 
 ob_start();
 include __DIR__ . '/../templates/jokelist.html.php';
