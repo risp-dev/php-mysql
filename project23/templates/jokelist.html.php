@@ -30,6 +30,6 @@
   </p>
 </blockquote>
 <?php endforeach; ?>
-        <?php endif; ?>
+        <?php endif; ?>       
 </body>
 </html>
