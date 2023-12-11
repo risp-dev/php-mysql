@@ -55,3 +55,12 @@ function insertJoke($pdo, $joketext, $authorid) {
         ];
         $stmt->execute($values);
     }
+
+    function allJokes($pdo) {
+        $stmt = $pdo->prepare('SELECT `joke`.`id`, `joketext`, `name`, `email`
+    FROM `joke` INNER JOIN `author`
+ON `authorid` = `author`.`id`');
+
+$stmt->execute();
+return $stmt->fetchAll();
+    }
