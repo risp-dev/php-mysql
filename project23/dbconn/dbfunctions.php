@@ -46,3 +46,12 @@ function insertJoke($pdo, $joketext, $authorid) {
             ];
             $stmt->execute($values);
     }
+
+    function deleteJoke($pdo, $id) {
+        $stmt = $pdo->prepare('DELETE FROM `joke` WHERE `id` = :id');
+    
+        $values = [
+            'id' => $id
+        ];
+        $stmt->execute($values);
+    }
