@@ -6,12 +6,16 @@ include __DIR__ .'/../dbconn/dbfunctions.php';
 
  //$sql = 'SELECT `joketext`, `id` FROM joke';
 
-$sql = 'SELECT j.`id`, j.`joketext`, j.`jokedate`, a.`name`, a.`email`
-FROM
-`joke` j 
-INNER JOIN `author` a
-ON
-j.`authorid`=a.`id`';
+// $sql = 'SELECT j.`id`, j.`joketext`, j.`jokedate`, a.`name`, a.`email`
+// FROM
+// `joke` j 
+// INNER JOIN `author` a
+// ON
+// j.`authorid`=a.`id`';
+
+$sql = 'SELECT `joke`.`id`, `joketext`, `name`, `email`
+    FROM `joke` INNER JOIN `author`
+      ON `authorid` = `author`.`id`';
 
   $jokes = $pdo->query($sql);
 

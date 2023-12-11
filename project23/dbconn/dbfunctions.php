@@ -1,6 +1,6 @@
 <?php 
 
-function totaljokes($database) {
+function totalJokes($database) {
     $stmt = $database->prepare('SELECT COUNT(*) FROM `joke` ');
 
 $stmt->execute();
@@ -32,17 +32,17 @@ function insertJoke($pdo, $joketext, $authorid) {
     $stmt->execute($values);
     }
 
-    function updateJoke($pdo, $jokeid, $joketext, $authorid) {
+    function updateJoke($pdo, $jokeId, $joketext, $authorId) {
         $stmt = $pdo->prepare('UPDATE `joke` 
         SET 
-            `authorid` = :authorid,
+            `authorId` = :authorId,
             `joketext` = :joketext
             WHERE `id` = :id');
 
             $values = [
-                ':joketext'=> $joketext,
-                ':authorid'=> $authorid,
-                ':id'=> $jokeid
+                ':joketext' => $joketext,
+                ':authorId' => $authorId,
+                ':id' => $jokeId
             ];
             $stmt->execute($values);
     }

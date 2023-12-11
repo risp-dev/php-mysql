@@ -9,14 +9,14 @@ if (isset($_POST['joketext'])){
     header('Location: jokes.php');
 
     }else {
-        $joke = getJoke($pdo, $_POST['id']);
+        $joke = getJoke($pdo, $_GET['id']);
 
         $title = 'Edit joke';
 
         ob_start();
         include __DIR__ .'/../templates/editjoke.html.php';
 
-        $output = ob_end_clean();
+        $output = ob_get_clean();
     }
 }catch(PDOException $e){
     $title = 'Error';
