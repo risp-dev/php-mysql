@@ -4,7 +4,12 @@ include __DIR__ .'/../dbconn/conn.php';
 include __DIR__ .'/../dbconn/dbfunctions.php';
 
 if (isset($_POST['joketext'])){
-    updateJoke($pdo, $_POST['jokeid'], $_POST['joketext'], 1);
+   // updateJoke($pdo, $_POST['jokeid'], $_POST['joketext'], 1);
+    updateJoke($pdo, [
+        'id' => $_POST['jokeid'],
+        'joketext'=> $_POST['joketext'],
+        'authorId' => '1'
+    ]);
 
     header('Location: jokes.php');
 

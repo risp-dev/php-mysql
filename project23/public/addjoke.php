@@ -4,7 +4,15 @@ if (isset($_POST['joketext'])) {
         $pdo = new PDO("mysql:host=localhost;dbname=project24;charsert=utf8mb4;",  'antrekotas', 'vmo/opUp73GnXuRx');
         include_once __DIR__ .'/../dbconn/dbfunctions.php';
 
-        insertJoke($pdo, $_POST['joketext'], 1);
+       // insertJoke($pdo, $_POST['joketext'], 1);
+       insertJoke($pdo, [
+        'authorId' => 1,
+        'joketext' => $_POST['joketext'],
+        'jokedate' => new DateTime()
+       ]
+    );
+       
+       
         //$output = '';
         //$sql = 'INSERT INTO `joke` SET
         //`joketext` = :joketext,
