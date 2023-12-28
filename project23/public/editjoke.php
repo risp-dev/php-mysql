@@ -3,11 +3,13 @@ try{
 include __DIR__ .'/../dbconn/conn.php';
 include __DIR__ .'/../dbconn/dbfunctions.php';
 
+
 if (isset($_POST['joketext'])){
    // updateJoke($pdo, $_POST['jokeid'], $_POST['joketext'], 1);
-    update($pdo, 'joke', 'id',[
+    save($pdo, 'joke', 'id',[
         'id' => $_POST['jokeid'],
         'joketext'=> $_POST['joketext'],
+        'jokedate' => new DateTime(),
         'authorId' => '1'
     ]);
 
