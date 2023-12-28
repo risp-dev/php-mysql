@@ -190,3 +190,15 @@ return $stmt->fetchAll();
 // $stmt->execute();
 // return $stmt->fetchAll();
 //     }
+
+function save($pdo, $table, $primaryKey, $record) {
+    try{
+        if(empty($record[$primaryKey])) {
+            unset($record[$primaryKey]);
+        }
+        insert($pdo, $table, $record);
+    }
+    catch (PDOException $e) {
+        update($pdo, $table, $primaryKey, $record);
+    }
+}
