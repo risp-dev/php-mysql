@@ -5,7 +5,7 @@ if (isset($_POST['joketext'])) {
         include_once __DIR__ .'/../dbconn/dbfunctions.php';
 
        // insertJoke($pdo, $_POST['joketext'], 1);
-       insertJoke($pdo, [
+       insert($pdo, 'joke', [
         'authorId' => 1,
         'joketext' => $_POST['joketext'],
         'jokedate' => new DateTime()

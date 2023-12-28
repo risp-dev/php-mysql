@@ -1,21 +1,49 @@
 <?php 
 
-function totalJokes($database) {
-    $stmt = $database->prepare('SELECT COUNT(*) FROM `joke` ');
+// function totalJokes($database) {
+//     $stmt = $database->prepare('SELECT COUNT(*) FROM `joke` ');
 
-$stmt->execute();
+// $stmt->execute();
 
-$row = $stmt->fetch();
-return $row[0];
+// $row = $stmt->fetch();
+// return $row[0];
+// }
+
+function total($pdo, $table) {
+    $stmt = $pdo->prepare('SELECT COUNT(*) FROM `'. $table .'`');
+    $stmt->execute();
+
+    $row = $stmt->fetch();
+    return $row[0];
 }
 
-function getJoke($pdo, $id) {
-    $stmt = $pdo->prepare('SELECT * FROM `joke` WHERE `id` = :id');
+function findAll($pdo, $table) {
+    $stmt = $pdo->prepare('SELECT * FROM `'. $table .'`');
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
+
+function findById($pdo, $table, $primaryKey, $value) {
+    $query = 'SELECT * FROM `' . $table .'`  WHERE `'. $primaryKey . '`= :value';
+   //??? $stmt = 'SELECT * FROM `' . $table .'`  WHERE `'. $primaryKey . '`= :value';
+
     $values = [
-        'id'=> $id
+        'value' => $value
     ];
+    $stmt = $pdo->prepare($query);
     $stmt->execute($values);
     return $stmt->fetch();
+}
+
+function find($pdo, $table, $field, $value) {
+    $query = 'SELECT * FROM `' . $table .'` WHERE `'. $field .'` = :value';
+
+    $values = [
+        'value' => $value
+    ];
+    $stmt = $pdo->prepare($query);
+    $stmt->execute($values);
+    return $stmt->fetchAll();
 }
 
 function processDates($values) {
@@ -42,21 +70,41 @@ function processDates($values) {
 //     $stmt->execute($values);
 //     }
 
-function insertJoke($pdo, $values) {
-    $query = 'INSERT INTO  `joke` (';
+// function insertJoke($pdo, $values) {
+//     $query = 'INSERT INTO  `joke` (';
 
-    foreach ($values as $key => $value) {
-        $query .= '`' . $key . '`,';
-    }
+//     foreach ($values as $key => $value) {
+//         $query .= '`' . $key . '`,';
+//     }
 
-    $query = rtrim($query, ',');
+//     $query = rtrim($query, ',');
    
-    $query .= ') VALUES (';
+//     $query .= ') VALUES (';
 
+//     foreach ($values as $key => $value) {
+//         $query .= ':' . $key . ',';
+//     }
+//     $query = rtrim($query, ',');
+//     $query .= ')';
+
+//     $values = processDates($values);
+
+//     $stmt = $pdo->prepare($query);
+//     $stmt->execute($values);
+// }
+
+function insert($pdo, $table, $values) {
+    $query = 'INSERT INTO `'. $table .'` (';
     foreach ($values as $key => $value) {
-        $query .= ':' . $key . ',';
+        $query .='`'. $key .'`';
     }
     $query = rtrim($query, ',');
+    $query .=') VALUES (';
+
+    foreach($values as $key => $value) {
+        $query .= ':'. $key .',';
+    }
+    $query = rtrim($query,',');
     $query .= ')';
 
     $values = processDates($values);
@@ -80,35 +128,65 @@ function insertJoke($pdo, $values) {
     //         $stmt->execute($values);
     // }
 
-function updateJoke($pdo, $values) {
-        $query = ' UPDATE `joke` SET ';
+// function updateJoke($pdo, $values) {
+//         $query = ' UPDATE `joke` SET ';
 
-        foreach ($values as $key => $value) {
-            $query .= '`'. $key . '` = :' . $key . ',';
-        }
-        $query = rtrim($query, ',');
-        $query .= ' WHERE `id` = :primaryKey' ;
-        $values['primaryKey'] = $values['id'];
-        $values = processDates($values);
+//         foreach ($values as $key => $value) {
+//             $query .= '`'. $key . '` = :' . $key . ',';
+//         }
+//         $query = rtrim($query, ',');
+//         $query .= ' WHERE `id` = :primaryKey' ;
+//         $values['primaryKey'] = $values['id'];
+//         $values = processDates($values);
         
-        $stmt = $pdo->prepare($query);
-        $stmt->execute($values);
-    }
+//         $stmt = $pdo->prepare($query);
+//         $stmt->execute($values);
+//     }
 
-function deleteJoke($pdo, $id) {
-        $stmt = $pdo->prepare('DELETE FROM `joke` WHERE `id` = :id');
-    
-        $values = [
-            'id' => $id
-        ];
-        $stmt->execute($values);
+function update($pdo, $table, $primaryKey, $values) {
+    $query = ' UPDATE `' . $table . '` SET ';
+    foreach( $values AS $key => $value) {
+        $query .= '`' . $key . '` = :' . $key . ',';
     }
+    $query = rtrim($query, ',');
+    $query .= 'WHERE `' . $primaryKey . '`  = :primaryKey';
+
+    $values['primaryKey'] = $values['id'];
+    $values = processDates($values);
+
+    $stmt = $pdo->prepare($query);
+    $stmt->execute($values);
+}
+
+// function deleteJoke($pdo, $id) {
+//         $stmt = $pdo->prepare('DELETE FROM `joke` WHERE `id` = :id');
+    
+//         $values = [
+//             'id' => $id
+//         ];
+//         $stmt->execute($values);
+//     }
+
+function delete($pdo, $table, $field, $value) {
+    $values = [':value' => $value];
+    $stmt = $pdo->prepare('DELETE FROM `'. $table .'` WHERE `'. $field .'` = :value');
+    $stmt->execute($values);
+}
 
 function allJokes($pdo) {
-        $stmt = $pdo->prepare('SELECT `joke`.`id`, `joketext`, `name`, `email`
+        $stmt = $pdo->prepare('SELECT `joke`.`id`, `joketext`, `jokedate`, `name`, `email`
     FROM `joke` INNER JOIN `author`
 ON `authorid` = `author`.`id`');
 
 $stmt->execute();
 return $stmt->fetchAll();
     }
+
+// function allJokes($pdo) {
+//         $stmt = $pdo->prepare('SELECT `joke`.`id`, `joketext`, `name`, `email`
+//     FROM `joke` INNER JOIN `author`
+// ON `authorid` = `author`.`id`');
+
+// $stmt->execute();
+// return $stmt->fetchAll();
+//     }

@@ -4,7 +4,8 @@ include __DIR__ . '/../dbconn/conn.php';
 include __DIR__ . '/../dbconn/dbfunctions.php';
 
 //$sql = 'DELETE FROM `joke` WHERE `id` = :id';
-deleteJoke($pdo, $_POST['id']);
+//deleteJoke($pdo, $_POST['id']);
+delete($pdo, 'joke', 'id', $_POST['id']);
 
 //$stmt = $pdo->prepare($sql);
 
