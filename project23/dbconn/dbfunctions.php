@@ -98,7 +98,8 @@ function processDates($values) {
 function insert($pdo, $table, $values) {
     $query = 'INSERT INTO `'. $table .'` (';
     foreach ($values as $key => $value) {
-        $query .='`'. $key .'`';
+        $query .='`'. $key .'`,';
+        //$query .= '`' . $key . '`,';
     }
     $query = rtrim($query, ',');
     $query .=') VALUES (';
@@ -147,12 +148,12 @@ function insert($pdo, $table, $values) {
 
 function update($pdo, $table, $primaryKey, $values) {
     $query = ' UPDATE `' . $table . '` SET ';
-    foreach( $values AS $key => $value) {
-        $query .= '`' . $key . '` = :' . $key . ',';
+    foreach($values as $key => $value) {
+        $query.= '`'. $key .'` =:'. $key .',';
     }
     $query = rtrim($query, ',');
-    $query .= 'WHERE `' . $primaryKey . '`  = :primaryKey';
-
+    $query .= ' WHERE `'. $primaryKey .'`  = :primaryKey';
+    
     $values['primaryKey'] = $values['id'];
     $values = processDates($values);
 
@@ -193,14 +194,25 @@ return $stmt->fetchAll();
 // return $stmt->fetchAll();
 //     }
 
+// function save($pdo, $table, $primaryKey, $record) {
+//     try{
+//         if(empty($record[$primaryKey])) {
+//             unset($record[$primaryKey]);
+//         }
+//         insert($pdo, $table, $record);
+//     }
+//     catch (PDOException $e) {
+//         update($pdo, $table, $primaryKey, $record);
+//     }
+// }
 function save($pdo, $table, $primaryKey, $record) {
-    try{
-        if(empty($record[$primaryKey])) {
-            unset($record[$primaryKey]);
+	try {
+        if (empty($record[$primaryKey])) {
+          unset($record[$primaryKey]);
         }
         insert($pdo, $table, $record);
-    }
-    catch (PDOException $e) {
-        update($pdo, $table, $primaryKey, $record);
-    }
+	}
+	catch (PDOException $e) {
+		update($pdo, $table, $primaryKey, $record);
+	}
 }
