@@ -1,7 +1,9 @@
 <?php
 $title = 'My crazy jokes';
 
-include_once __DIR__ . '/../dbconn/conn.php';
-include_once __DIR__ .'/../dbconn/dbfunctions.php';
-
-//echo totalJokes($pdo);
+$jokesTable = new DatabaseTable();
+$jokesTable->pdo = $pdo;
+$jokesTable->table = 'joke';
+$jokesTable->primaryKey = 'id';
+$joke1 = $jokesTable->find('id', 1)[0];
+$joke2 = $jokesTable->find('id', 2)[0];
