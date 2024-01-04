@@ -22,6 +22,13 @@ class DatabaseTable {
         return $stmt->fetchAll();
     }
 
+    public function findAll() {
+        $stmt = $this->pdo->prepare('SELECT * FROM `'. $this->table .'`');
+        $stmt->execute();
+
+        return $result->fetchAll();
+    }
+
      private function insert($values) {
         $query = 'INSERT INTO `'. $this->table .'` (';
 
@@ -66,22 +73,6 @@ class DatabaseTable {
         $stmt->execute($values);
     }
 
-    public function findAll() {
-        $stmt = $this->pdo->prepare('SELECT * FROM `'. $this->table .'`');
-        $stmt->execute();
-
-        return $result->fetchAll();
-    }
-
-    private function processDates($values) {
-        foreach ($values as $key => $value) {
-            if ($value instanceof DateTime) {
-                $values[$key] = $value->format('Y-m-d H:i:s');
-            }
-        }
-        return $values;
-    }
-
     public function save($record) {
         try{
             if(empty($record[$this->primaryKey])) {
@@ -91,6 +82,14 @@ class DatabaseTable {
         }catch(PDOException $e) {
             $this->update($record);
         }
+    }
+    private function processDates($values) {
+        foreach ($values as $key => $value) {
+            if ($value instanceof DateTime) {
+                $values[$key] = $value->format('Y-m-d H:i:s');
+            }
+        }
+        return $values;
     }
 
 }
