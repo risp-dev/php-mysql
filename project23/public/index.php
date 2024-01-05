@@ -1,7 +1,8 @@
 <?php
 $title = 'Hi there';
 include __DIR__ . '/../dbconn/conn.php';
-include __DIR__ .'/../dbconn/dbfunctions.php';
+include __DIR__ . '/../classes/DatabaseTable.php';
+//include __DIR__ .'/../dbconn/dbfunctions.php';
 
  $sql = 'SELECT `joketext` 
  FROM `joke` 

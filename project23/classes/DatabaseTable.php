@@ -26,7 +26,13 @@ class DatabaseTable {
         $stmt = $this->pdo->prepare('SELECT * FROM `'. $this->table .'`');
         $stmt->execute();
 
-        return $result->fetchAll();
+        //return $result->fetchAll();
+        //or:
+       // $result = $stmt->fetchAll();
+        //return $result;
+        //or
+        return $stmt->fetchAll();
+
     }
 
      private function insert($values) {

@@ -2,12 +2,19 @@
 $title = 'My crazy jokes';
 try {
 include __DIR__ . '/../dbconn/conn.php';
-include __DIR__ .'/../dbconn/dbfunctions.php';
+include __DIR__ . '/../classes/DatabaseTable.php';
+//include __DIR__ .'/../dbconn/dbfunctions.php';
 
-$result = findAll($pdo, 'joke');
+$jokesTable = new DatabaseTable($pdo, 'joke', 'id');
+$authorsTable = new DatabaseTable($pdo, 'author', 'id');
+
+$result = $jokesTable->findAll();
+//$result = findAll($pdo, 'joke');
+
 $jokes = [];
 foreach ($result as $joke) {
-  $author = find($pdo, 'author', 'id', $joke['authorid'])[0];
+  $author = $authorsTable->find('id', $joke['authorid'])[0];
+  //$author = find($pdo, 'author', 'id', $joke['authorid'])[0];
   $jokes[] = [
     'id'=> $joke['id'],
     'joketext' => $joke['joketext'],
@@ -16,22 +23,10 @@ foreach ($result as $joke) {
     'email'=> $author['email'],
   ];
 }
- //$sql = 'SELECT `joketext`, `id` FROM joke';
-
-// $sql = 'SELECT j.`id`, j.`joketext`, j.`jokedate`, a.`name`, a.`email`
-// FROM
-// `joke` j 
-// INNER JOIN `author` a
-// ON
-// j.`authorid`=a.`id`';
-
-//$sql = 'SELECT `joke`.`id`, `joketext`, `name`, `email`
-   // FROM `joke` INNER JOIN `author`
-     // ON `authorid` = `author`.`id`';
-
-  //$jokes = $pdo->query($sql);
+ 
   $title = 'Joke list';
-  $totalJokes = total($pdo, 'joke');
+  $totalJokes = $jokesTable->total();
+  //$totalJokes = total($pdo, 'joke');
 
 ob_start();
 include __DIR__ . '/../templates/jokelist.html.php';

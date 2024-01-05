@@ -1,14 +1,16 @@
 <?php
 try {
 include __DIR__ . '/../dbconn/conn.php';
-include __DIR__ . '/../dbconn/dbfunctions.php';
+//include __DIR__ . '/../dbconn/dbfunctions.php';
+include __DIR__ . '/../classes/DatabaseTable.php';
 
 //$sql = 'DELETE FROM `joke` WHERE `id` = :id';
 //deleteJoke($pdo, $_POST['id']);
-delete($pdo, 'joke', 'id', $_POST['id']);
+//delete($pdo, 'joke', 'id', $_POST['id']);
+$jokesTable = new DatabaseTable($pdo, 'joke', 'id');
+$jokesTable->delete('id', $_POST['id']);
 
 //$stmt = $pdo->prepare($sql);
-
 //$stmt->bindValue(':id', $_POST['id']);
 //$stmt->execute();
 
