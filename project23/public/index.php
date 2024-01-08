@@ -1,29 +1,31 @@
 <?php
-$title = 'Hi there';
+//$title = 'Hi there';
+try {
 include __DIR__ . '/../dbconn/conn.php';
 include __DIR__ . '/../classes/DatabaseTable.php';
 //include __DIR__ .'/../dbconn/dbfunctions.php';
+include __DIR__ . '/../controllers/JokeController.php';
 
- $sql = 'SELECT `joketext` 
- FROM `joke` 
- ORDER BY `id` DESC 
- LIMIT 1';
+$jokesTable = new DatabaseTable($pdo, 'joke', 'id');
+$authorsTable = new DatabaseTable($pdo, 'author', 'id');
 
-// $joke1 = getJoke($pdo, 1);
-// echo $joke1['joketext'];
-// $joke2 = getJoke($pdo, 2);
-// echo $joke2['joketext'];
-// $joke3 = getJoke($pdo, 3);
-// echo $joke3['joketext'];
+$jokeController = new JokeController($jokesTable, $authorsTable);
 
-
-$result = $pdo->query($sql);
-
-//while ($row = $result->fetch()) {
-    foreach ($result as $row) {
-    $jokes[] = $row['joketext'];
+if(isset($_GET['edit'])) {
+    $page = $jokeController->edit();
+}else if (isset($_GET['delete'])) {
+    $page = $jokeController->delete();
+}else if(isset($_GET['list'])) {
+    $page = $jokeController->list();
+}else {
+    $page = $jokeController->home();
 }
-ob_start();
-include __DIR__ . '/../templates/index.html.php';
-$output = ob_get_clean();
+$title = $page['title'];
+$output = $page['output'];
+
+}catch (PDOException $e) {
+    $title = 'Error';
+    $output = 'Database error: ' . $e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine();
+}
+
 include __DIR__ . '/../templates/layout.html.php';

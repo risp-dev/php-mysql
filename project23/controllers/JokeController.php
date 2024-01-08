@@ -14,6 +14,11 @@ class JokeController {
         return ['output' => $output, 'title' => $title];
     }
 
+    public function delete() {
+        $this->jokesTable->delete('id', $_POST['id']);
+        header('Location: index.php');
+    }
+
     public function list() {
         $result = $this->jokesTable->findAll();
 
