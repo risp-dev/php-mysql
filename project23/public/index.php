@@ -1,9 +1,7 @@
 <?php
-//$title = 'Hi there';
 try {
 include __DIR__ . '/../dbconn/conn.php';
 include __DIR__ . '/../classes/DatabaseTable.php';
-//include __DIR__ .'/../dbconn/dbfunctions.php';
 include __DIR__ . '/../controllers/JokeController.php';
 
 $jokesTable = new DatabaseTable($pdo, 'joke', 'id');

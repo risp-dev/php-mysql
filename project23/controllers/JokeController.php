@@ -7,7 +7,7 @@ class JokeController {
         $title = 'Jokes portal';
 
         ob_start();
-        include __DIR__ . '/../templates/index.html.php';
+        include __DIR__ . '/../templates/home.html.php';
 
         $output = ob_get_clean();
 
@@ -16,7 +16,7 @@ class JokeController {
 
     public function delete() {
         $this->jokesTable->delete('id', $_POST['id']);
-        header('Location: index.php');
+        header('Location: jokes.php');
     }
 
     public function list() {
