@@ -1,4 +1,12 @@
 <?php
+
+function loadTemplate($templateFileName, $variables) {
+    extract($variables);
+    ob_start();
+    include __DIR__ .'/../templates/' . $templateFileName;
+    return ob_get_clean();
+}   
+
 try {
 include __DIR__ . '/../dbconn/conn.php';
 include __DIR__ . '/../classes/DatabaseTable.php';
@@ -23,7 +31,18 @@ $page = $jokeController->$action();
 //     $page = $jokeController->home();
 // }
 $title = $page['title'];
-$output = $page['output'];
+
+$variables = $page['variables'] ?? [];
+$output = loadTemplate($page['template'], $variables);
+
+// if (isset($page['variables'])) {
+//     extract($page['variables']);
+// }
+//$output = $page['output'];
+// ob_start();
+
+// include __DIR__ . '/../templates/' . $page['template'];
+// $output = ob_get_clean();
 
 }catch (PDOException $e) {
     $title = 'Error';

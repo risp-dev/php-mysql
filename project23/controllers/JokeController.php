@@ -6,17 +6,11 @@ class JokeController {
     public function home() {
         $title = 'Jokes portal';
 
-        ob_start();
-        include __DIR__ . '/../templates/home.html.php';
-
-        $output = ob_get_clean();
-
-        return ['output' => $output, 'title' => $title];
-    }
-
-    public function delete() {
-        $this->jokesTable->delete('id', $_POST['id']);
-        header('Location: jokes.php');
+        // ob_start();
+        // include __DIR__ . '/../templates/home.html.php';
+        // $output = ob_get_clean();
+        // return ['output' => $output, 'title' => $title];
+        return ['template' => 'home.html.php', 'title' => $title];
     }
 
     public function list() {
@@ -38,12 +32,22 @@ class JokeController {
 
         $totalJokes = $this->jokesTable->total();
 
-        ob_start();
-        include __DIR__ . '/../templates/jokelist.html.php';
+        // ob_start();
+        // include __DIR__ . '/../templates/jokelist.html.php';
 
-        $output = ob_get_clean();
+        // $output = ob_get_clean();
 
-        return ['output' => $output, 'title' => $title];
+        // return ['output' => $output, 'title' => $title];
+        return ['template' => 'jokelist.html.php', 
+        'title' => $title, 
+        'variables' => [
+            'totalJokes' => $totalJokes,
+            'jokes' => $jokes
+        ]];
+    }
+    public function delete() {
+        $this->jokesTable->delete('id', $_POST['id']);
+        header('Location: index.php?action=list');
     }
 
     public function edit() {
@@ -54,22 +58,30 @@ class JokeController {
 
             $this->jokesTable->save($joke);
 
-            header('Location: jokes.php');
+            header('Location: index.php?action=list');
         }
         else {
             if(isset($_GET['id'])) {
-                $joke = find($pdo, 'joke', 'id', $_GET['id'])[0] ?? null;
+                //the line below is not working as I would expect
+                //$joke = find($pdo, 'joke', 'id', $_GET['id'])[0] ?? null;
+                $joke = $this->jokesTable->find('id', $_GET['id'])[0] ?? null;
+
             }
             else {
                 $joke = null;
             }
             $title = 'Edit Joke';
 
-            ob_start();
-            include __DIR__ .'/../templates/editjoke.html.php';
-            $output = ob_get_clean();
+            // ob_start();
+            // include __DIR__ .'/../templates/editjoke.html.php';
+            // $output = ob_get_clean();
 
-            return ['output' => $output, 'title' => $title];
+            // return ['output' => $output, 'title' => $title];
+        return ['template' => 'editjoke.html.php', 'title' => $title, 'variables' => 
+    [
+        'joke' => $joke
+    ]
+];
         }
     }
     

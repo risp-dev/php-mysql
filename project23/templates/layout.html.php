@@ -6,15 +6,15 @@
     <link rel="stylesheet" href="../templates/css/style.css">
     <title><?=$title?></title>
 </head>
-<body>
+<body><nav>
 <header>
 <h1>Jokes</h1>
 </header>
-<nav>
+
 <ul>
 <li><a href="index.php">Home</a></li>
-      <li><a href="index.php?list">Jokes List</a></li>
-      <li><a href="index.php?edit">Add a new Joke</a></li>
+      <li><a href="index.php?action=list">Jokes List</a></li>
+      <li><a href="index.php?action=edit">Add a new Joke</a></li>
 </ul>
 </nav>
 <main>

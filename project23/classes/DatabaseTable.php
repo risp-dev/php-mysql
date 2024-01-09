@@ -13,6 +13,7 @@ class DatabaseTable {
 
     public function find($field, $value) {
         $query = 'SELECT * FROM `'. $this->table .'` WHERE `'. $field .'` = :value';
+        
         $values = [
             'value' => $value
         ];
@@ -72,12 +73,29 @@ class DatabaseTable {
 
     }
 
-    public function delete($field, $value) {
-        $values = [':value' => $value];
+    // public function delete($field, $value) {
+    //     $values = [':value' => $value];
 
-        $stmt = $this->pdo->prepare('DELETE FROM `'. $this->table. '` WHERE `'. $field .' = :value`');
-        $stmt->execute($values);
-    }
+    //     $stmt = $this->pdo->prepare('DELETE FROM `'. $this->table. '` WHERE `'. $field .' = :value`');
+    //     $stmt->execute($values);
+    // }
+
+        public function delete($field, $value) {
+            $values = [':value' => $value];
+            $stmt = $this->pdo->prepare('DELETE FROM `'. $this->table .'` WHERE `'. $field .'` = :value');
+           // $stmt = $this->pdo->prepare('DELETE FROM `' . $this->table . '` WHERE `' . $field . '` = :value');
+            $stmt->execute($values);
+            
+        }
+//         public function delete() {
+//             $this->jokesTable->delete('id', $_POST['id']);
+//             header('Location: index.php?action=list');
+        
+//  }    // public function delete() {
+	//     $this->jokesTable->delete('id', $_POST['id']);
+
+	//     header('location: index.php?action=list');
+	// }
 
     public function save($record) {
         try{
