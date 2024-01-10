@@ -26,6 +26,7 @@ if($action == strtolower($action)) {
     } else {
         http_response_code(301);
         header('Location: index.php?action=' . strtolower($action));
+        exit;
     }
 
 
