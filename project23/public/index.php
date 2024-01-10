@@ -19,6 +19,16 @@ $jokeController = new JokeController($jokesTable, $authorsTable);
 
 //action replace ifelse
 $action = $_GET['action'] ?? 'home';
+
+//upperCase to lowerCase
+if($action == strtolower($action)) {
+    $jokeController->$action();
+    } else {
+        http_response_code(301);
+        header('Location: index.php?action=' . strtolower($action));
+    }
+
+
 $page = $jokeController->$action();
 
 // if(isset($_GET['edit'])) {
