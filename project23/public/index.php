@@ -20,7 +20,7 @@ $authorsTable = new DatabaseTable($pdo, 'author', 'id');
 $action = $_GET['actioon'] ?? 'home';
 $controllerName = $_GET['controller'] ?? 'joke';
 
-if ($cotrollerName === 'joke') {
+if ($controllerName === 'joke') {
     $controller = new JokeController($jokesTable, $authorsTable);
 } else if ($controllerName === 'author') {
     $controller = new AuthorController($authorsTable);
