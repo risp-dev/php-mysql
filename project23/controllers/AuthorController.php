@@ -1,9 +1,10 @@
 <?php
-class AuthorsController {
-    public function __construct(private $authorsTable) {
+class AuthorController {
+	public function __construct(private $authorsTable) {
 
-    }
-    public function register(){
-        //sample function for a second controller
-    }
+	}
+
+	public function register() {
+		//sample function for a second controller
+	}
 }

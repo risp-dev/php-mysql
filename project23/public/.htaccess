@@ -1,4 +1,7 @@
-RewriteEngine on
+Options +FollowSymLinks
+RewriteEngine On
+RewriteBase /php-mysql/project23/public
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^.*$ /index.php [NC,Q,LSA]
+RewriteRule ^.*$ /index.php [NC,L,QSA]
