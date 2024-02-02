@@ -1,7 +1,8 @@
 <?php 
+namespace Ninja;
 class DatabaseTable {
     
-    public function __construct(private PDO $pdo, private string $table, private string $primaryKey) {
+    public function __construct(private \PDO $pdo, private string $table, private string $primaryKey) {
             }
 
     public function total() {
@@ -27,11 +28,6 @@ class DatabaseTable {
         $stmt = $this->pdo->prepare('SELECT * FROM `'. $this->table .'`');
         $stmt->execute();
 
-        //return $result->fetchAll();
-        //or:
-       // $result = $stmt->fetchAll();
-        //return $result;
-        //or
         return $stmt->fetchAll();
 
     }
@@ -70,32 +66,14 @@ class DatabaseTable {
         $values = $this->processDates($values);
         $stmt = $this->pdo->prepare($query);
         $stmt->execute($values);
-
     }
-
-    // public function delete($field, $value) {
-    //     $values = [':value' => $value];
-
-    //     $stmt = $this->pdo->prepare('DELETE FROM `'. $this->table. '` WHERE `'. $field .' = :value`');
-    //     $stmt->execute($values);
-    // }
 
         public function delete($field, $value) {
             $values = [':value' => $value];
             $stmt = $this->pdo->prepare('DELETE FROM `'. $this->table .'` WHERE `'. $field .'` = :value');
-           // $stmt = $this->pdo->prepare('DELETE FROM `' . $this->table . '` WHERE `' . $field . '` = :value');
             $stmt->execute($values);
             
         }
-//         public function delete() {
-//             $this->jokesTable->delete('id', $_POST['id']);
-//             header('Location: index.php?action=list');
-        
-//  }    // public function delete() {
-	//     $this->jokesTable->delete('id', $_POST['id']);
-
-	//     header('location: index.php?action=list');
-	// }
 
     public function save($record) {
         try{
@@ -103,14 +81,14 @@ class DatabaseTable {
                 unset($record[$this->primaryKey]);
             }
             $this->insert($record);
-        }catch(PDOException $e) {
+        }catch(\PDOException $e) {
             $this->update($record);
         }
     }
     private function processDates($values) {
         foreach ($values as $key => $value) {
-            if ($value instanceof DateTime) {
-                $values[$key] = $value->format('Y-m-d H:i:s');
+            if ($value instanceof \DateTime) {
+                $values[$key] = $value->format('Y-m-d');
             }
         }
         return $values;
